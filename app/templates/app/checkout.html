@@ -29,7 +29,7 @@
                 <div class="card mb-2">
                     <div class="card-body">
                         <h5>Product : {{item.product.title}}</h5>
-                        <p>Quantity : {{item.quantity}}</p>
+                        <p>Quantity : {{item.product.quantity}}</p>
                         <div class="fw-bold">Price: {{item.product.discounted_price}}</div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                         <label for="totamount" class="form-label">Total Amount</label><br>
                         <input type="number" class="form-label" name="totamount" value="{{totalamount}}" readonly>
 
-                    </div>
+                    </div> 
                     <div class="text-end">
                         {% comment %} <button type="submit" class="btn btn-warning mt-3 px-5 fw-bold">Continue</button> {% endcomment %}
                         {% comment %} <div id="paypal-button-container"></div> {% endcomment %}

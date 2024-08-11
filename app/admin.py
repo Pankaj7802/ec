@@ -1,6 +1,9 @@
 from django.contrib import admin
 from . models import Product
 from . models import Customer,Cart,Payment,OrderPlaced,Wishlist
+from django.utils.html import format_html
+from django.urls import reverse
+from django.contrib.auth.models import Group
 # Register your models here.
 @admin.register(Product)
 class ProductModelAdmin(admin.ModelAdmin):
@@ -12,7 +15,14 @@ class CustomerModelAdmin(admin.ModelAdmin):
     
 @admin.register(Cart)
 class CartModelAdmin(admin.ModelAdmin):
-    list_display=['id','user','product','quantity']
+    list_display = ['id', 'user', 'product_link', 'quantity']
+
+    def product_link(self, obj):
+        link = reverse("admin:app_product_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+
+    # product_link.short_description = 'Product'
+
 
 @admin.register(Payment)
 class PaymentModelAdmin(admin.ModelAdmin):
@@ -20,8 +30,24 @@ class PaymentModelAdmin(admin.ModelAdmin):
 
 @admin.register(OrderPlaced)
 class OrderPlacedModelAdmin(admin.ModelAdmin):
-    list_display=['id','user','customer','product','quantity','ordered_date','status','payment']
+    list_display=['id','user','customers','product_link','quantity','ordered_date','status','payments']
+    def product_link(self, obj):
+        link = reverse("admin:app_product_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    
+    def customers(self, obj):
+        link = reverse("admin:app_customer_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+    
+    def payments(self, obj):
+        link = reverse("admin:app_payment_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
 
 @admin.register(Wishlist)
 class WishlistModelAdmin(admin.ModelAdmin):
-    list_display=['id','user','product']
+    list_display=['id','user','product_link']
+    def product_link(self, obj):
+        link = reverse("admin:app_product_change", args=[obj.product.pk])
+        return format_html('<a href="{}">{}</a>', link, obj.product.title)
+
+admin.site.unregister(Group)

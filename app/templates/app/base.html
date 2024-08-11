@@ -60,9 +60,9 @@
                 <a class="nav-link text-white" href="{% url 'contact' %}">Contact Us</a>
               </li>
             </ul>
-            <form class="d-flex" role="search">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex" role="search" action="/search">
+              <input class="form-control me-2" type="search" placeholder="Search" name="search" aria-label="Search">
+              <button class="btn btn-outline-dark" type="submit">Search</button>
             </form>
           </div>
 
@@ -81,17 +81,17 @@
             </li>
             <li class="nav-item mx-2">
               <a href="{% url 'showcart' %}" class="nav-link text-white" ><span class="badge bg-danger">
-              {% if totalitem > 0 %} {{totalitem}}
+              {% if totalitem > 0 %} {{totalitem}} 
                 
               {% endif %}
-                </span>Cart </a>
+                </span>  Cart </a>
             </li>
             <li class="nav-item mx-2">
-              <a href="{% url 'showcart' %}" class="nav-link text-white" ><span class="badge bg-danger">
-                {% if wishitem > 0 %} {{wishitem}}
+              <a href="{% url 'showwishlist' %}" class="nav-link text-white"> <span class="badge bg-danger">
+                {% if wishitem > 0 %} {{wishitem}} 
                   
                 {% endif %}
-                  </span><i class="fa fa-heart "></i> </a>
+                  </span>&nbsp;&nbsp;<i class="fas fa-heart"></i> </a>
             </li>
             {% else %}
             <li class="nav-item mx-2">
@@ -124,8 +124,8 @@
         
       {% endblock payment-gateway %}
         
-        
-        <footer class="container-fluid fixed-bottom bg-success text-center p-2 mt-5">
+      {% comment %} <footer class="container-fluid fixed-bottom bg-success text-center p-2 mt-5"> {% endcomment %}
+        <footer class="container-fluid bottom bg-success text-center p-2 mt-5">
           Copyright :2024 || Develop by : Pankaj Kr. Yadav
         </footer>
 
